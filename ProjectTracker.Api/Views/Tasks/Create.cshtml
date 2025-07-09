@@ -1,0 +1,48 @@
+﻿@model ProjectTracker.Application.Dtos.CreateTaskDto
+@{
+    ViewData["Title"] = "New Task";
+    var projectId = (Guid)ViewBag.ProjectId;
+    var today = DateTime.Today.ToString("yyyy-MM-dd");
+}
+
+<!— Inherits your _Layout.cshtml —>
+@{
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Create New Task</h3>
+                <form asp-action="Create" asp-route-projectId="@projectId" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label">Title</label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="DueDate" class="form-label">Due Date</label>
+                        <input asp-for="DueDate"
+                               type="date"
+                               class="form-control"
+                               value="@(Model.DueDate == default ? today : Model.DueDate.ToString("yyyy-MM-dd"))" />
+                        <span asp-validation-for="DueDate" class="text-danger"></span>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Create Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

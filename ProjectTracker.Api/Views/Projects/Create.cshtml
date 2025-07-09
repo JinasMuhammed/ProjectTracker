@@ -1,0 +1,29 @@
+﻿@model ProjectTracker.Application.Dtos.CreateProjectDto
+@{
+    ViewData["Title"] = "New Project";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Create New Project</h3>
+                <form asp-action="Create" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Name</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Create Project</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
